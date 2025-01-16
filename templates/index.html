@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+  <p>The local date and time is {{ current_time.strftime('%Y-%m-%d %H:%M:%S') }}.</p>
+</div>
+
+<form method="POST" action="/">
+  {{ form.hidden_tag() }}
+
+  <div class="form-group">
+    {{ form.name.label }}
+    {{ form.name(class="form-control") }}
+  </div>
+
+  <div class="form-group">
+    {{ form.email.label }}
+    {{ form.email(class="form-control") }}
+  </div>
+
+  <div class="form-group">
+    {{ form.submit(class="btn btn-primary") }}
+  </div>
+</form>
+
+<h2>Usuários</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Função</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
